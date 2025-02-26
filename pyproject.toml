@@ -1,0 +1,27 @@
+[project]
+name = "torch-voxel-subsample"
+version = "0.1.0"
+description = "Fast voxel subsampling of point-clouds."
+readme = "README.md"
+authors = [
+    { name = "Jackson Campolattaro", email = "jackson.campolattaro@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "torch>=2.6.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+    "coverage>=7.6.12",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
