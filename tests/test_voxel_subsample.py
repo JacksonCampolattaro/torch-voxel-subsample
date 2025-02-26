@@ -20,6 +20,24 @@ def test_subsampling_fully_occupied():
     assert len(samples) == num_cells
 
 
+def test_subsampling_random():
+    pos = torch.rand(10_000, 3)
+    samples_a = voxel_subsample(pos, 1 / 16)
+    samples_b = voxel_subsample(pos, 1 / 16)
+
+    assert len(samples_a) == len(samples_b)
+    assert not (samples_a == samples_b).all()
+
+
+def test_subsampling_deterministic():
+    pos = torch.rand(10_000, 3)
+    samples_a = voxel_subsample(pos, 1 / 16, pick=0)
+    samples_b = voxel_subsample(pos, 1 / 16, pick=0)
+
+    assert len(samples_a) == len(samples_b)
+    assert (samples_a == samples_b).all()
+
+
 @pytest.mark.parametrize('n', [100, 1_000, 10_000])
 @pytest.mark.parametrize('voxel_size', [1 / 2, 1 / 8, 1 / 32])
 def test_subsampling_correctness(n: int, voxel_size: float):
